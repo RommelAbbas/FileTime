@@ -1,5 +1,4 @@
-import os
-from os import pread
+from watchdog import events
 
-for root, dirs, files in os.walk("/home/rommel/filetime-test"):
-    print(root)
+for event in events.FileSystemEvent:
+    print(event)
