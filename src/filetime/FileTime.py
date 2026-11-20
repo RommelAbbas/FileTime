@@ -18,7 +18,7 @@ def recursive_inotify(bas_path):
     for root, dirs, files in os.walk(bas_path):
         inotify.add_watch(root, watch_flags)
 
-
+recursive_inotify("/home/rommel/PyCharmMiscProject/FileTime")
 while True:
     events = inotify.read()
     for event in events:
