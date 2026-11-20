@@ -15,17 +15,8 @@ watch_flags = (
 wd = {}
 
 def recursive_inotify(bas_path):
-    for root, dirs, files in os.walk("/home/rommel/filetime-test"):
+    for root, dirs, files in os.walk(bas_path):
         inotify.add_watch(root, watch_flags)
 
 
-# # Watch all existing directories
-# for root, dirs, files in os.walk("/home/rommel/filetime-test"):
-#     # print(root, dirs, files)
-#     inotify.add_watch(root, watch_flags)
-#     print("Watching:", root)
-#
-# # Listen for changes
-# while True:
-#     for event in inotify.read():
-#         print(flags.from_mask(event.mask), event.name)
+events = inotify.read()
