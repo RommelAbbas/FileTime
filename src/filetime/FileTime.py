@@ -19,6 +19,7 @@ def recursive_inotify(bas_path):
         inotify.add_watch(root, watch_flags)
 
 
-events = inotify.read()
 while True:
-    print(events)
+    events = inotify.read()
+    for event in events:
+        print(flags.from_mask(event.mask), event.name)
