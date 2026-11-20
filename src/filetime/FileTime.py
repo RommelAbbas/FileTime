@@ -1,4 +1,6 @@
 import os
+from idlelib import history
+
 from inotify_simple import INotify, flags
 
 inotify = INotify()
@@ -12,14 +14,23 @@ watch_flags = (
     | flags.CLOSE_WRITE
 )
 
-wd = {}
+watches = {}
+history = []
 
 def recursive_inotify(bas_path):
     for root, dirs, files in os.walk(bas_path):
-        inotify.add_watch(root, watch_flags)
+        wd = inotify.add_watch(root, watch_flags)
+        watches[wd] = root
 
 recursive_inotify("/home/rommel/PyCharmMiscProject/FileTime")
 while True:
     events = inotify.read()
     for event in events:
         print(flags.from_mask(event.mask), event.name)
+        entry = {
+            "action" : flags.from_mask(event.mask),
+            "file" : events.name
+        }
+        full_path = os.path.join(watches[event.wd], events.name)
+        history.append(entry)
+        print(entry)
