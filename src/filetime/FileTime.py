@@ -20,3 +20,5 @@ def recursive_inotify(bas_path):
 
 
 events = inotify.read()
+while True:
+    print(events)
