@@ -29,7 +29,7 @@ while True:
         print(flags.from_mask(event.mask), event.name)
         entry = {
             "action" : flags.from_mask(event.mask),
-            "file" : events.name
+            "file" : event.name
         }
         full_path = os.path.join(watches[event.wd], events.name)
         history.append(entry)
